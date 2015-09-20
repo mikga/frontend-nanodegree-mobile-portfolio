@@ -60,6 +60,19 @@ You might find the FPS Counter/HUD Display useful in Chrome developer tools desc
 
 ####Optimisation for Part 2.
 
-1. In changePizzaSizes function (line 450 in main.js), specify the width using percent rather than px. This requires changes to the determineDx function (line 426). This eliminates forced syhcronous layout.
-1. In updatePositions function (line 506 in main.js), create a variable to store the value of document.body.scrollTop. This also eliminates forced syhcronous layout.
-1. Finally, specify "will-change: transform;" to the .mover element in style.css. This puts the elements into separate layers and reduces paint. For the browsers which don't support will-change, "transform: translateZ(0);" is also specified.
+In main.js:
+
+1. Specify the width using percent rather than px. This requires changes to the determineDx function (line 426). This eliminates forced syhcronous layout (line 450)
+1. Change querySelectorAll to getElementsByClassName to get better performance (line 455, 516)
+1. Store the array length in a local variable in the for loop so that the length is checked once at the beginning (line 457, 517)
+1. Store the DOM elements selected by getElementByClassName in a local variable so that DOM is not searched repeatedly in the loop (line 463)
+1. Move the pizzasDiv definition out of the for loop so that the DOM is not searched repeatedly in the for loop (line 479)
+1. In updatePositions function, create a variable to store the value of document.body.scrollTop. This also eliminates forced syhcronous layout (line 506)
+1. Declare the variable phase outside the for loop to prevent the variable to be created repeatedly in the loop (line 519, 543, 544)
+1. Calculate the number of pizzas based on the screen height (line 540)
+1. Change querySelector to getElementById to get better performance (line 544)
+
+In style.css:
+
+1. Specify "will-change: transform;" to the .mover element in style.css. This puts the elements into separate layers and reduces paint. For the browsers which don't support will-change, "transform: translateZ(0);" is also specified (including the vender prefixes). This will trigger GPU acceleration in modern desktop and mobile browsers.
+1. Specify "backface-visibility: hidden" to get better performance

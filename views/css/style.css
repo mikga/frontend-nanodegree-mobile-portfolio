@@ -33,12 +33,17 @@ form {
   position: fixed;
   width: 256px;
   z-index: -1;
-  will-change: transform; /* put this element into a separate layer */
-  transform: translateZ(0); /* for the browsers which don't support will-change */
+  will-change: transform; /* Put this element into a separate layer */
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0); /* For the browsers which don't support will-change */
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden; /* Hide the backface to get better performance */
 }
 
 .randomPizzaContainer {
   float: left;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
 }
 
@@ -48,6 +53,6 @@ form {
   clear:both;
 }
 
- .container {
+.container {
   background-color: rgba(240, 60, 60, 0.8);
 }
