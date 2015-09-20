@@ -33,6 +33,8 @@ form {
   position: fixed;
   width: 256px;
   z-index: -1;
+  will-change: transform; /* put this element into a separate layer */
+  transform: translateZ(0); /* for the browsers which don't support will-change */
 }
 
 .randomPizzaContainer {
